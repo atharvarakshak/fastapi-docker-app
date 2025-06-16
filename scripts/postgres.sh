@@ -1,0 +1,1 @@
+docker run --name=fastapi-postgres -e POSTGRES_USER=myuser -e POSTGRES_PASSWORD=password -e POSTGRES_DB=fastapi_database -p 5432:5432 -d postgres:alpine
