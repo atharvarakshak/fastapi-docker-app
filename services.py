@@ -40,3 +40,18 @@ async def get_contact(contact_id: int, db: "Session"):
     return contact
 
 
+async def delete_contact(contact: _models.Contact, db: "Session"):
+    db.delete(contact)
+    db.commit()
+
+
+async def update_contact(contact_data: _schemas.CreateContact, contact: _models.Contact, db: "Session")->_schemas.Contact:
+    contact.first_name = contact_data.first_name
+    contact.last_name = contact_data.last_name
+    contact.email = contact_data.email
+    contact.phone_number = contact.phone_number
+
+    db.commit()
+    db.refresh(contact)
+
+    return _schemas.Contact.model_validate(contact)
