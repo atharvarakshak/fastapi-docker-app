@@ -1,0 +1,4 @@
+fastpi[ALL]
+SQLAlchemy
+pyscopg2-binary
+black
