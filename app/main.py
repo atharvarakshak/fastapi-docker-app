@@ -11,10 +11,8 @@ if TYPE_CHECKING:
 
 @asynccontextmanager
 async def lifespan(app: _fastapi.FastAPI):
-    # This runs before the app starts
     _services._add_tables()
     yield
-    # This runs on shutdown (optional cleanup here)
 
 
 app = _fastapi.FastAPI(lifespan=lifespan)
