@@ -1,14 +1,23 @@
 import fastapi as _fastapi
+from contextlib import asynccontextmanager
 from typing import TYPE_CHECKING, List
-import schemas as _schemas
+from . import schemas as _schemas
 import sqlalchemy.orm as _orm
-import services as _services
+from . import services as _services
 
 if TYPE_CHECKING:
     from sqlalchemy.orm import Session
 
 
-app = _fastapi.FastAPI()
+@asynccontextmanager
+async def lifespan(app: _fastapi.FastAPI):
+    # This runs before the app starts
+    _services._add_tables()
+    yield
+    # This runs on shutdown (optional cleanup here)
+
+
+app = _fastapi.FastAPI(lifespan=lifespan)
 
 
 @app.post("/api/contacts/", response_model=_schemas.Contact)

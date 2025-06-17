@@ -1,6 +1,6 @@
-import database as _database
-import models as _models
-import schemas as _schemas
+from . import database as _database
+from . import models as _models
+from . import schemas as _schemas
 from typing import TYPE_CHECKING, List
 
 if TYPE_CHECKING:
